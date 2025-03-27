@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ItemList from "./pages/Search";
 import Login from "./pages/Login";
 import { ToastContainer } from "react-toastify";
-import Signup from "./pages/SignUp";
+import SignUp from "./pages/SignUp";
 import VerifyEmail from "./pages/VerifyEmail";
 import ViewUsersItems from "./components/ViewUsersItems";
 import EditItem from "./pages/EditItem";
@@ -31,7 +31,7 @@ function App() {
           <Route path="/recent-items/:id" element={<ShowItemDetail />} />
           <Route path="/items/search" element={<ItemList />} />
           <Route path="/user/login" element={<Login />} />
-          <Route path="/user/signup" element={<Signup />} />
+          <Route path="/user/signup" element={<SignUp />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/items/user-items" element={<ViewUsersItems />} />
           <Route path="/items/item/edit-item/:id" element={<EditItem />} />
