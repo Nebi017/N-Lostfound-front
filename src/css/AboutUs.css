@@ -1,0 +1,72 @@
+.about-us {
+  font-family: poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-us h1{
+  text-align: center;
+   margin-top: 120px;
+   font-weight: 300;
+}
+
+.about-container {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: 90px;
+  width: 90%;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-image img {
+  width: 600px;
+}
+.about-content {
+  margin-top: 20px;
+  padding-right: 50px;
+}
+.about-content h2 {
+  font-size: 37px;
+  font-weight: 300;
+  margin: 20px;
+}
+.about-content p {
+  font-size: 15px;
+  font-weight: 200;
+}
+
+.about-content ul li {
+  font-size: 15px;
+  font-weight: 200;
+}
+
+.about-button {
+  width: 200px;
+  font-family: Poppins;
+  background-color: #44edfc;
+  border: none;
+  height: 40px;
+  font-size: 15px;
+  color: black;
+  font-weight: 600;
+  margin: 10px 0px;
+}
+
+.about-button:hover {
+  color: black;
+  transition: 0.4s;
+  background-color: #fe979b;
+}
+@media (max-width: 1100px) {
+  .about-image img {
+    display: none;
+  }
+  .about-container {
+    text-align: start;
+      margin-left: 30px;
+      padding-left: 40px;
+      padding-bottom: 40px;
+  }
+}

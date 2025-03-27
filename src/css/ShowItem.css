@@ -1,0 +1,33 @@
+.whole-container {
+  font-family: poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 140px 50px 90px 50px;
+  width: 80%;
+}
+.item-detail {
+  border: 1px solid rgba(0, 0, 0, 0.373);
+  padding: 15px;
+}
+.item-detail h4 {
+  font-weight: 300;
+  font-size: 18px;
+  margin: 0;
+}
+.item-detail p {
+  font-weight: 200;
+  font-size: 15px;
+}
+.middle-info {
+  margin-top: 40px;
+  border-top: 5px solid rgba(0, 128, 75, 0.552);
+}
+.top-info {
+  border-top: 5px solid rgba(0, 128, 75, 0.552);
+}
+.bottom-info {
+  border-top: 5px solid rgba(0, 128, 75, 0.552);
+}
+.item-detail-image img {
+  max-width: 600px;
+  height: auto;
+  margin: 20px 0;
+}

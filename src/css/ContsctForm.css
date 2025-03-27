@@ -1,0 +1,278 @@
+/* From Uiverse.io by somshri16 */
+.wholee {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Use min-height to ensure it covers the viewport */
+  font-family: poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px; /* Add padding for smaller screens */
+  box-sizing: border-box; /* Ensure padding is included in the height */
+}
+
+.wholee h1 {
+  margin-top: 50px;
+  text-align: center; /* Center the heading */
+}
+
+.contact-page {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  justify-content: center; /* Center the content */
+  gap: 20px; /* Add gap between form and icons */
+  width: 100%;
+  max-width: 1200px; /* Limit maximum width */
+  margin-top: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%; /* Full width by default */
+  max-width: 450px; /* Limit maximum width */
+  background-color: rgba(128, 128, 128, 0.066);
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  margin-left: 100px;
+}
+
+.message {
+  color: rgba(88, 87, 87, 0.822);
+  font-size: 14px;
+  text-align: center; /* Center the message */
+}
+
+.flex {
+  display: flex;
+  flex-direction: column; /* Stack inputs vertically on smaller screens */
+  gap: 10px;
+  width: 100%;
+}
+
+.form label {
+  position: relative;
+  width: 100%;
+}
+
+.form label .input,
+.form label .input01 {
+  width: 100%;
+  padding: 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.893);
+  border-radius: 5px;
+  font-size: 1em;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.form label .input + span,
+.form label .input01 + span {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+  pointer-events: none;
+}
+
+.form label .input:placeholder-shown + span,
+.form label .input01:placeholder-shown + span {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span,
+.form label .input01:focus + span,
+.form label .input01:valid + span {
+  top: 0;
+  font-size: 0.7em;
+  font-weight: 600;
+  background: #fff;
+  padding: 0 5px;
+  color: #333;
+}
+
+.form label .input:valid + span,
+.form label .input01:valid + span {
+  color: #4caf50; /* Subtle green for valid inputs */
+}
+
+.input01 {
+  resize: vertical; /* Allow vertical resizing for textarea */
+  min-height: 100px; /* Set a minimum height for the textarea */
+}
+
+.fancy {
+  background-color: rgba(0, 213, 255, 0.864);
+  border: 2px solid #cacaca;
+  border-radius: 0px;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 390;
+  letter-spacing: 2px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 8px 30px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 13px;
+  width: 100%; /* Full width for smaller screens */
+}
+
+.fancy::before {
+  content: " ";
+  width: 1.7rem;
+  height: 2px;
+  background: #cacaca;
+  top: 50%;
+  left: 90%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.fancy .text {
+  font-size: 1.125em;
+  line-height: 1.33333em;
+  padding-left: 7em;
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: #818181;
+}
+
+.fancy .top-key {
+  height: 2px;
+  width: 1.5625rem;
+  top: -2px;
+  left: 0.625rem;
+  position: absolute;
+  background: white;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.fancy .bottom-key-1 {
+  height: 2px;
+  width: 1.5625rem;
+  right: 1.875rem;
+  bottom: -2px;
+  position: absolute;
+  background: white;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy .bottom-key-2 {
+  height: 2px;
+  width: 0.625rem;
+  right: 0.625rem;
+  bottom: -2px;
+  position: absolute;
+  background: white;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy:hover {
+  color: #333; /* Darker text color for better contrast */
+  background: #00add8;
+}
+
+.fancy:hover::before {
+  width: 1.5rem;
+  background: white;
+}
+
+.fancy:hover .text {
+  color: #333; /* Darker text color for better contrast */
+  padding-left: 7.5em;
+}
+
+.fancy:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.fancy:hover .bottom-key-1,
+.fancy:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center; /* Center icons */
+  gap: 25px;
+  margin: 40px;
+}
+
+.iconn {
+  font-size: 40px;
+  color: #00add8;
+}
+
+.iconn-back {
+  background-color: white;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.contact-icon h3 {
+  color: #00add8;
+  text-align: start; /* Center the heading */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .contact-page {
+    flex-direction: column; /* Stack form and icons vertically */
+    align-items: center; /* Center the content */
+  }
+
+  .form {
+    margin-left: 0; /* Remove fixed margin */
+  }
+
+  .fancy {
+
+    width: auto; /* Allow button to shrink */
+  }
+  .wholee {
+    text-align: center;
+    padding: 30px;
+  }
+  .wholee h1 {
+  margin-top: 120px;
+  
+}
+
+
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 15px;
+    margin-bottom:0px;
+  }
+
+  .fancy .text {
+    padding-left: 5em; /* Adjust text padding */
+  }
+}

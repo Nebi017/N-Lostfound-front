@@ -1,0 +1,144 @@
+.formm {
+  font-family: Poppins, Geneva, Verdana, sans-serif;
+  padding-left: 4rem;
+  margin-bottom: 60px;
+  margin-top: 130px;
+  box-sizing: border-box;
+}
+
+.formm h2 {
+  font-size: 40px;
+  font-weight: 400;
+}
+.formm ul li {
+  font-size: 16px;
+  font-weight: 300 !important;
+  line-height: 1.6;
+  color: #333;
+}
+.form-group {
+  margin-bottom: 30px;
+}
+
+.form-group label {
+  font-size: 23px;
+  font-weight: 200 !important;
+  margin-bottom: 30px;
+}
+.form-group p {
+  font-size: 15px;
+  margin: 7px;
+  font-weight: 200 !important;
+  line-height: 1.6;
+  color: #333;
+}
+.form-group input[type="text"],
+input[type="tel"],
+input[type="email"], #subcity{
+  width: 100%; /* Takes full width of the container */
+  max-width: 500px; /* Sets a reasonable max width */
+  min-width: 200px; /* Prevents input from getting too small */
+  box-sizing: border-box;
+  height: 39px;
+}
+#subcity:focus {
+  outline: none;
+  border-color: #0056b3;
+}
+input[type="date"],
+input[type="time"] {
+  min-width: 200px;
+  height: 39px;
+}
+
+.form-group textarea {
+  width: 100%; /* Takes full width of the container */
+  max-width: 500px; /* Sets a reasonable max width */
+  min-width: 200px; /* Prevents input from getting too small */
+  box-sizing: border-box;
+  min-height: 60px;
+}
+.form-group input::placeholder,
+textarea::placeholder {
+  font-size: 15px;
+  opacity: 0.5;
+}
+
+.form-group select {
+  font-family: "poppins", sans-serif; /* Change the font */
+  font-size: 16px; /* Adjust the font size */
+  opacity: 0.5;
+}
+
+
+.top-form {
+  display: flex;
+  margin: 10px;
+  padding: 20px;
+}
+.top-form :first-child {
+  margin-right: 50px;
+}
+.middle-form {
+  display: flex;
+  margin: 10px;
+  padding: 20px;
+}
+.location-map {
+  margin: 0 0 50px  25px;
+}
+.middle-form :first-child {
+  margin-right: 30px;
+}
+
+.bottom-form {
+  display: flex;
+  margin: 10px;
+  padding: 20px;
+}
+.bottom-form :first-child {
+  margin-right: 80px;
+}
+.bttn {
+  width: 200px;
+  font-family: Poppins;
+  background-color: #44edfc;
+  border: none;
+  height: 40px;
+  font-size: 15px;
+  margin-left: 50%;
+  color: black;
+  font-weight: 600;
+}
+
+.bttn:hover {
+  color: black;
+  transition: 0.4s;
+  background-color: #fe979b;
+}
+
+@media (max-width: 900px) {
+  .top-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .middle-form {
+    display: flex;
+    flex-direction: column;
+  }
+  .bottom-form {
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group textarea {
+    width: 100%;
+  }
+  .form {
+    padding-left: 1rem;
+    margin-top: 160px;
+  }
+  .bttn {
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,18 @@
+.btnn {
+  display: inline-block;
+  padding: 4px 16px; /* Equivalent to px-4 py-1 */
+  background-color: #05cbd5; /* Equivalent to bg-sky-800 */
+  color: white; /* Equivalent to text-white */
+  border-radius: 8px; /* Equivalent to rounded-lg */
+  width: fit-content; /* Equivalent to w-fit */
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.btnn:hover {
+  background-color: #0369a1; /* Slightly lighter shade for hover effect */
+}
+
