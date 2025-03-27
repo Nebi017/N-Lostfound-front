@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
-import "../css/viewRecentItems.css";
+import "../css/ViewRecentItems.css";
 import placeholderImage from "../assets/photose/image.png";
 
 const ViewRecentItems = () => {
