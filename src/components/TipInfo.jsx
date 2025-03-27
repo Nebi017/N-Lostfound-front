@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/TipInfo.css";
+import "../css/Tipinfo.css";
 import { useState,useEffect } from "react";
 
 const TipInfo = () => {
