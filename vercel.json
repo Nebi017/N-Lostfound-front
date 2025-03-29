@@ -1,0 +1,16 @@
+{
+  "rewrites": [
+    {
+      "source": "/user/:path*",
+      "destination": "https://n-lostfound.onrender.com/user/:path*"
+    },
+    {
+      "source": "/books/:path*",
+      "destination": "https://n-lostfound.onrender.com/books/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
