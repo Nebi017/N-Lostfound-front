@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSnackbar } from "notistack";
-import { useNavigate } from "react-router-dom";
 import "../css/ItemSubmissionForm.css";
 import TipInfo from "../components/TipInfo";
 import GoogleMapViewer from "../components/GoogleMapViewer";
@@ -15,6 +14,7 @@ const ItemSubmissionForm = () => {
   const fileInputRef = useRef(null);
   const submissionType = location.state?.submissionType || "Lost";
   const [imagePreview, setImagePreview] = useState(null);
+  
   const initialFormData = {
     itemName: "",
     category: "",
@@ -23,7 +23,7 @@ const ItemSubmissionForm = () => {
     secondaryColor: "",
     dateLostorFound: "",
     timeLostorFound: "",
-    image: null,
+    image: "", // Cloudinary image URL
     additionalInfo: "",
     whereLostorFound: "",
     location: "",
@@ -34,85 +34,70 @@ const ItemSubmissionForm = () => {
     contactEmail: "",
     status: submissionType.toLowerCase(),
   };
+
   const [formData, setFormData] = useState(initialFormData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => {
-      const updatedData = { ...prevData, [name]: value };
-      return updatedData;
-    });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData({ ...formData, image: file });
-      setImagePreview(imageUrl);
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "your_upload_preset"); // Replace with your Cloudinary upload preset
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", // Replace with your Cloudinary cloud name
+        formData
+      );
+
+      setFormData((prevData) => ({ ...prevData, image: response.data.secure_url }));
+      setImagePreview(response.data.secure_url);
+    } catch (error) {
+      enqueueSnackbar("Error uploading image. Please try again.", { variant: "error" });
     }
   };
 
   const handleRemoveImage = () => {
     setImagePreview(null);
+    setFormData((prevData) => ({ ...prevData, image: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formDataToSend = new FormData();
-
-    Object.keys(formData).forEach((key) => {
-      if (key !== "image") {
-        formDataToSend.append(key, formData[key]);
-      }
-    });
-
-    if (formData.image) {
-      formDataToSend.append("image", formData.image);
-    }
-
     const token = localStorage.getItem("token");
 
     try {
-      // Decode token to get userId
-      const decodedToken = JSON.parse(atob(token.split(".")[1])); // Decode JWT payload
-      const userId = decodedToken.id || decodedToken._id; // Ensure correct ID key
-
-      // Add userId to formData
-      formDataToSend.append("userId", userId);
-
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const userId = decodedToken.id || decodedToken._id;
+      
       const response = await axios.post(
-        "https://n-lostfound.onrender.com/api/items",
-        formDataToSend,
+        "http://localhost:5001/api/items",
+        { ...formData, userId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
         }
       );
 
-      enqueueSnackbar(response.data.message || "Item submitted successfully!", {
-        variant: "success",
-      });
+      enqueueSnackbar(response.data.message || "Item submitted successfully!", { variant: "success" });
       navigate("/items/user-items");
-
       setFormData(initialFormData);
 
       if (fileInputRef.current) {
         fileInputRef.current.value = "";
-        fileInputRef.current.files = null;
       }
     } catch (error) {
-      enqueueSnackbar(
-        error.response?.data?.message || "Error submitting item.",
-        {
-          variant: "error",
-        }
-      );
+      enqueueSnackbar(error.response?.data?.message || "Error submitting item.", { variant: "error" });
     }
   };
-
   return (
     <>
       <div className="formm">
@@ -249,89 +234,74 @@ const ItemSubmissionForm = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <label htmlFor="image">Upload Image</label> <br />
-                <p>(This image will display on the Website.)(optional)</p>
-                <div>
-                  {imagePreview ? (
-                    <div
-                      style={{ position: "relative", display: "inline-block" }}
-                    >
-                      <img
-                        src={imagePreview}
-                        alt="Preview"
-                        style={{
-                          maxWidth: "100%",
-                          height: "200px",
-                          display: "block",
-                        }}
-                      />
-                      {/* Delete Button */}
-                      <button
-                        onClick={handleRemoveImage}
-                        style={{
-                          position: "absolute",
-                          top: "5px",
-                          right: "5px",
-                          background: "red",
-                          color: "white",
-                          border: "none",
-                          borderRadius: "50%",
-                          width: "25px",
-                          height: "25px",
-                          cursor: "pointer",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        ✖
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <input
-                        id="image"
-                        type="file"
-                        name="image"
-                        onChange={handleFileChange}
-                        ref={fileInputRef}
-                        style={{ display: "none" }}
-                      />
-                      <label
-                        htmlFor="image"
-                        style={{
-                          display: "block",
-                          cursor: "pointer",
-                          color: "blue",
-                          textDecoration: "underline",
-                          border: "2px dashed black", // Border added
-                          maxWidth: "70%",
-                          height: "200px",
-
-                          alignItems: "center",
-                          justifyContent: "center",
-                          position: "relative",
-                          padding: "10px",
-                        }}
-                      >
-                        <i
-                          className="fas fa-upload"
-                          style={{
-                            position: "absolute",
-                            top: "10px",
-                            right: "10px",
-                            fontSize: "20px",
-                            color: "gray",
-                          }}
-                        ></i>{" "}
-                        Upload
-                      </label>
-                    </div>
-                  )}
-                </div>
-              </div>
-
+               <div className="form-group">
+      <label htmlFor="image">Upload Image</label> <br />
+      <p>(This image will display on the Website.)(optional)</p>
+      <div>
+        {imagePreview ? (
+          <div style={{ position: "relative", display: "inline-block" }}>
+            <img
+              src={imagePreview}
+              alt="Preview"
+              style={{ maxWidth: "100%", height: "200px", display: "block" }}
+            />
+            <button
+              onClick={handleRemoveImage}
+              style={{
+                position: "absolute",
+                top: "5px",
+                right: "5px",
+                background: "red",
+                color: "white",
+                border: "none",
+                borderRadius: "50%",
+                width: "25px",
+                height: "25px",
+                cursor: "pointer",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              ✖
+            </button>
+          </div>
+        ) : (
+          <div>
+            <input
+              id="image"
+              type="file"
+              name="image"
+              onChange={handleFileChange}
+              ref={fileInputRef}
+              style={{ display: "none" }}
+            />
+            <label
+              htmlFor="image"
+              style={{
+                display: "block",
+                cursor: "pointer",
+                color: "blue",
+                textDecoration: "underline",
+                border: "2px dashed black",
+                maxWidth: "70%",
+                height: "200px",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                padding: "10px",
+              }}
+            >
+              <i
+                className="fas fa-upload"
+                style={{ position: "absolute", top: "10px", right: "10px", fontSize: "20px", color: "gray" }}
+              ></i>{" "}
+              Upload
+            </label>
+          </div>
+        )}
+      </div>
+    </div>
               <div className="form-group">
                 <label htmlFor="additionalInfo">Additional Info</label> <br />
                 <p>
