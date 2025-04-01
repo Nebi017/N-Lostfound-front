@@ -52,7 +52,7 @@ const ItemSubmissionForm = () => {
 
     try {
       const response = await axios.post(
-        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", // Replace with your Cloudinary cloud name
+        "https://api.cloudinary.com/v1_1/dmezexlow/image/upload", // Replace with your Cloudinary cloud name
         formData
       );
 
